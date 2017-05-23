@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>新增消費</h1>		
+    {% for message in form.name.errors %}
+        <div>{{ message }}</div>
+    {% endfor %}
+    
+    {% for message in form.email.errors %}
+        <div>{{ message }}</div>
+    {% endfor %}
+    
+    <form action = "/contact" method = post>
+        <fieldset>
+        <legend>Contact Form</legend>
+        {{ form.hidden_tag() }}
+        
+        <div style = font-size:20px; font-weight:bold; margin-left:150px;>
+            {{ form.name.label }}<br>
+            {{ form.name }}
+            <br>
+            
+            {{ form.Gender.label }} {{ form.Gender }}
+            {{ form.Address.label }}<br>
+            {{ form.Address }}
+            <br>
+            
+            {{ form.email.label }}<br>
+            {{ form.email }}
+            <br>
+            
+            {{ form.Age.label }}<br>
+            {{ form.Age }}
+            <br>
+            
+            {{ form.language.label }}<br>
+            {{ form.language }}
+            <br>
+            {{ form.submit }}
+        </div>
+        
+        </fieldset>
+    </form>
+</body>
+</html>
