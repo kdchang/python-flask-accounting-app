@@ -1,5 +1,16 @@
-# Python Flask Accounting App 
+# Python Flask Accounting App
+An Accounting Web App built by Python Flask
 
+## Extensions
+1. Flask-Script
+2. Flask-Migrate
+3. Flask-Mongoengine
+4. Flask-Login
+5. Flask-OAuth
+6. Flask-Principal 
+7. Flask-SQLAlchemy
+
+## Documents
 1. [[python][flask][flask-SQLAlchemy]关于flask-SQLAlchemy的初级使用教程](http://www.cnblogs.com/alima/p/5734992.html)
 2. [flask-migrate](https://flask-migrate.readthedocs.io/en/latest/)
 3. [flask-sqlalchemy](http://flask-sqlalchemy.pocoo.org/2.1/quickstart/)

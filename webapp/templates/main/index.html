@@ -1,0 +1,31 @@
+{% extends 'layouts/layout.html' %}
+
+{% block content %}
+<div>
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+	<div class="jumbotron">
+		<div class="container">
+			<h1>記錄生活中的每筆消費</h1>
+			<p>這是一個使用 Python Flask 寫的記帳 Web App</p>
+			<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+		</div>
+	</div>
+    <div class="container">
+        <table class="table table-hover">
+            <tr>
+                <th>消費項目</th>
+                <th>消費類別</th>
+                <th>消費費用</th>
+                <th>操作</th>
+            </tr>        
+        {% for account in accounts %}
+            <tr>
+                <td>{{ account.title }}</td>
+                <td>{{ account.type }}</td>
+                <td>{{ account.cost }}</td>
+            </tr>    
+        {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
