@@ -1,10 +1,18 @@
 from mongoengine import *
+from flask_login import UserMixin
+
 
 db = connect('iRichDB')
 
+class User(Document, UserMixin):
+    username = StringField(max_length=20)
+    email = StringField(max_length=36)
+    password = StringField(max_length=100)
+    #pass
+
 class Account(Document):
     title = StringField(max_length=50)
-    type = StringField(max_length=50)
+    types = StringField(max_length=50)
     cost = IntField(max_length=50)
 
 # from flask_sqlalchemy import SQLAlchemy

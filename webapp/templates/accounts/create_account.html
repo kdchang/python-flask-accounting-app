@@ -4,13 +4,13 @@
 <div class="container main-container">
     <h1>新增消費</h1>
     <hr>
-    <form action="/create/accounts" method="POST">
+    <form action="/accounts/create" method="POST">
         <div>
             {{ form.csrf_token }}
             <label for="">消費項目</label>
             <input class="form-control" type="text" name="title" placeholder="請輸入消費項目">
             <label for="">消費類別</label>
-            <select class="form-control" name="type">
+            <select class="form-control" name="types">
                 <option value="eat">食</option>
                 <option value="cloth">衣</option>
                 <option value="home">住</option>

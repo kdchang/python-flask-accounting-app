@@ -13,3 +13,6 @@ class DevConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///../database.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
+    DEBUG_TB_PANELS = ['flask_mongoengine.panels.MongoDebugPanel']
+    DEBUG_TB_ENABLED = True
+    DEBUG_TB_INTERCEPT_REDIRECTS = False

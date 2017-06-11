@@ -1,6 +1,7 @@
 from flask_mongoengine.wtf import model_form
-from .models import Account
+from .models import User, Account
 
+UserForm = model_form(User)
 AccountForm = model_form(Account)
 
 # from flask_wtf import FlaskForm

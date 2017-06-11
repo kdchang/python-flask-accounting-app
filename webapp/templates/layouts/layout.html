@@ -24,9 +24,23 @@
 				<a class="navbar-brand" href="/">iRich 愛記帳</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse navbar-form navbar-right">
-                <a href="/create/accounts">
-                    <button class="btn btn-success">新增消費</button>
-                </a>
+                {% if current_user.is_authenticated %}
+                    <a href="">Hi {{ current_user.username }}!</a>
+                    <a href="/accounts/create">
+                        <button class="btn btn-success">新增消費</button>
+                    </a>
+                    <form class="navbar-collapse collapse navbar-right" action="/logout" method="POST">
+                        {{ form.csrf_token }}
+                        <button class="btn btn-primary">登出</button>
+                    </form>
+                {% else %}
+                    <a href="/login">
+                        <button class="btn btn-success">登入</button>
+                    </a>
+                    <a href="/signup">
+                        <button class="btn btn-primary">註冊</button>
+                    </a>
+                {% endif %}
 			</div>
 			<!--/.navbar-collapse -->
 		</div>

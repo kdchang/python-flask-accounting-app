@@ -1,0 +1,10 @@
+{% extends 'layouts/layout.html' %}
+
+{% block content %}
+<div class="container main-container">
+    <h1>消費名稱：{{ account.title }}</h1>
+    <h3>消費類別：{{ account.types }}</h3>
+    <h3>消費金額：{{ account.cost }}</h3>
+    <hr>
+</div>
+{% endblock %}

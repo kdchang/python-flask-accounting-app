@@ -1,17 +1,10 @@
-from flask import (render_template,
-                   current_app,
-                   Blueprint,
-                   redirect,
-                   url_for,
-                   request,
-                   flash,
-                   session,
-                   redirect,
-                   request)
-from functools import wraps
+from flask import render_template, Blueprint, redirect, url_for, request, flash, session, redirect, abort, flash
+from webapp.models import User, Account
+from webapp.forms import UserForm
+from flask_login import UserMixin, LoginManager, login_required, current_user, login_user, logout_user, current_user
+from webapp.extensions import login_manager
+from passlib.hash import pbkdf2_sha256
 
-from ..forms import AccountForm
-from ..models import Account
 
 main_blueprint = Blueprint(
     'main',
@@ -19,57 +12,76 @@ main_blueprint = Blueprint(
     template_folder='../templates/main'
 )
 
-from functools import wraps
-from flask import request, Response
+users = {'foo@bar.tld': {'pw': 'secret'}}
 
-
-def check_auth(username, password):
-    """This function is called to check if a username /
-    password combination is valid.
-    """
-    return username == 'admin' and password == 'secret'
-
-def authenticate():
-    """Sends a 401 response that enables basic auth"""
-    return Response(
-    'Could not verify your access level for that URL.\n'
-    'You have to login with proper credentials', 401,
-    {'WWW-Authenticate': 'Basic realm="Login Required"'})
-
-def requires_auth(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        auth = request.authorization
-        if not auth or not check_auth(auth.username, auth.password):
-            return authenticate()
-        return f(*args, **kwargs)
-    return decorated
+@login_manager.user_loader
+def load_user(user_id):
+    print('user_id', user_id)
+    user = User.objects(id=user_id).first()
+    return user
 
 @main_blueprint.route('/')
-def index():
+def get_index():
     accounts = Account.objects
-    return render_template('main/index.html', accounts=accounts)
+    form = UserForm()
+    return render_template('main/index.html', accounts=accounts, form=form)
 
-@main_blueprint.route('/create/accounts')
-@requires_auth
-def get_create_account():
-    form = AccountForm()
-    return render_template('main/create_account.html', form=form)    
+@main_blueprint.route('/login', methods=['GET'])
+def get_login():
+    form = UserForm()
+    return render_template('main/login.html', form=form)
 
-@main_blueprint.route('/create/accounts', methods=['POST'])
-def post_create_account():
-    form = AccountForm()
-    print('form.validate_on_submit()', form.validate_on_submit())
-    print('request.method', request.method)
-    if request.method == 'POST' and form.validate_on_submit():
-        # do something
-        title = request.form.get('title')
-        type = request.form.get('type')
-        cost = request.form.get('cost')
-        new_account = Account(title=title, type=type, cost=cost)
-        new_account.save()
-        print('new_account', new_account)
-        return redirect(url_for('main.index'))
-    else:
-        return redirect(url_for('main.get_create_account'))
-        
+@main_blueprint.route('/login', methods=['POST'])
+def post_login():
+    form = UserForm()
+    email = request.form.get('email')
+    password = request.form.get('password')
+    if form.validate_on_submit():
+        user = User.objects(email=email).first()
+        check_password = pbkdf2_sha256.verify(password, pbkdf2_sha256.hash(request.form.get('password')))
+
+        if user != None and check_password:
+            flash('Logged in successfully.')
+            next = request.args.get('next')
+
+            login_user(user)
+            return redirect(next or url_for('main.get_index'))
+
+    return render_template('main/login.html', form=form)
+
+@main_blueprint.route('/signup', methods=['GET'])
+def get_signup():
+    form = UserForm()
+    return render_template('main/signup.html', form=form)
+
+@main_blueprint.route('/signup', methods=['POST'])
+def post_signup():
+    form = UserForm()
+    if form.validate_on_submit():
+        flash('Signedup in successfully.')
+        email = request.form.get('email')
+        username = request.form.get('username')
+        password = pbkdf2_sha256.hash(request.form.get('password'))
+
+        print('password', password)
+        user = User(email=email, username=username, password=password)
+
+        result = user.save()
+
+        next = request.args.get('next')
+
+        print('signup', result)
+        # if not is_safe_url(next):
+        #     return abort(400)
+        return redirect(next or url_for('main.get_index'))
+
+    return render_template('main/signup.html', form=form)
+
+@main_blueprint.route('/logout', methods=['POST'])
+@login_required
+def post_logout():
+    next = request.args.get('next')
+    logout_user()
+    # if not is_safe_url(next):
+    #     return abort(400)
+    return redirect(next or url_for('main.get_index'))
