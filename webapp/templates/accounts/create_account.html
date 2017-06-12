@@ -8,9 +8,9 @@
         <div>
             {{ form.csrf_token }}
             <label for="">消費項目</label>
-            <input class="form-control" type="text" name="title" placeholder="請輸入消費項目">
+            <input class="form-control" type="text" name="title" placeholder="請輸入消費項目" required>
             <label for="">消費類別</label>
-            <select class="form-control" name="types">
+            <select class="form-control" name="types" required>
                 <option value="eat">食</option>
                 <option value="cloth">衣</option>
                 <option value="home">住</option>
@@ -18,7 +18,7 @@
                 <option value="play">育樂</option>
             </select>
             <label for="">消費金額</label>
-            <input class="form-control" type="number" name="cost" placeholder="請輸入消費金額">
+            <input class="form-control" type="number" name="cost" placeholder="請輸入消費金額" required>
             <hr>
             <button class="btn btn-primary btn-block" type="submit">提交送出</button>
         </div>

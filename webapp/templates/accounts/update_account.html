@@ -8,9 +8,9 @@
         <div>
             {{ form.csrf_token }}
             <label for="">消費項目</label>
-            <input class="form-control" type="text" name="title" placeholder="請輸入消費項目" value="{{ account.title }}">
+            <input class="form-control" type="text" name="title" placeholder="請輸入消費項目" value="{{ account.title }}" required>
             <label for="">消費類別</label>
-            <select class="form-control" name="types">
+            <select class="form-control" name="types" required>
                 <option {% if account.type == 'eat' %} selected="selected" {% endif %} value="eat">食</option>
                 <option {% if account.type == 'cloth' %} selected="selected" {% endif %} value="cloth">衣</option>
                 <option {% if account.type == 'home' %} selected="selected" {% endif %} value="home">住</option>
@@ -18,7 +18,7 @@
                 <option {% if account.type == 'play' %} selected="selected" {% endif %} value="play">育樂</option>
             </select>
             <label for="">消費金額</label>
-            <input class="form-control" type="number" name="cost" value="{{ account.cost }}" placeholder="請輸入消費金額">
+            <input class="form-control" type="number" name="cost" value="{{ account.cost }}" placeholder="請輸入消費金額" required>
             <hr>
             <button class="btn btn-primary btn-block" type="submit">提交送出</button>
         </div>

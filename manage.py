@@ -15,7 +15,7 @@ app = create_app('webapp.config.%sConfig' % env.capitalize())
 
 migrate = Migrate(app, db)
 manager = Manager(app)
-manager.add_command("runserver", Server())
+manager.add_command('runserver', Server())
 manager.add_command('db', MigrateCommand)
 
 @manager.shell

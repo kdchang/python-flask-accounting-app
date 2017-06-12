@@ -6,7 +6,7 @@ db = connect('iRichDB')
 
 class User(Document, UserMixin):
     username = StringField(max_length=20)
-    email = StringField(max_length=36)
+    email = StringField(max_length=36, default='email')
     password = StringField(max_length=100)
     #pass
 

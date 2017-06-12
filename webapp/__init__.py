@@ -3,7 +3,7 @@ from flask import Flask
 from .models import db
 from .controllers.main import main_blueprint
 from .controllers.account import account_blueprint
-from .extensions import csrf, login_manager, db, toolbar
+from .extensions import csrf, login_manager, db, toolbar, oauth
 
 
 def create_app(object_name):
@@ -23,6 +23,7 @@ def create_app(object_name):
 
     db.init_app(app)
     toolbar.init_app(app)
+    oauth.init_app(app)
 
     app.secret_key = 'Secret Menu'
     app.register_blueprint(main_blueprint)

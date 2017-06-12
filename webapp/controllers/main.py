@@ -4,15 +4,14 @@ from webapp.forms import UserForm
 from flask_login import UserMixin, LoginManager, login_required, current_user, login_user, logout_user, current_user
 from webapp.extensions import login_manager
 from passlib.hash import pbkdf2_sha256
-
+from webapp.extensions import facebook
+from flask_oauthlib.client import OAuth, OAuthException
 
 main_blueprint = Blueprint(
     'main',
     __name__,
     template_folder='../templates/main'
 )
-
-users = {'foo@bar.tld': {'pw': 'secret'}}
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -85,3 +84,42 @@ def post_logout():
     # if not is_safe_url(next):
     #     return abort(400)
     return redirect(next or url_for('main.get_index'))
+
+@main_blueprint.route('/facebook_login')
+def facebook_login():
+    callback = url_for(
+        'main.facebook_authorized',
+        next=request.args.get('next') or request.referrer or None,
+        _external=True
+    )
+    return facebook.authorize(callback=callback)
+
+@main_blueprint.route('/login/authorized')
+def facebook_authorized():
+    resp = facebook.authorized_response()
+    if resp is None:
+        return redirect(next or url_for('main.get_index'))
+
+    if isinstance(resp, OAuthException):
+        return 'Access denied: %s' % resp.message
+
+    session['oauth_token'] = (resp['access_token'], '')
+    me = facebook.get('/me')
+    print('me', me.__dict__)
+    facebook_id = me.data['id']
+    user = User.objects(facebook_id=facebook_id).first()
+    next = request.args.get('next')
+
+    if facebook_id != None and user:
+        login_user(user)
+        return redirect(next or url_for('main.get_index'))
+    else:
+        username = me.data['name'] 
+        user = User(username=username, facebook_id=facebook_id)
+        user.save()
+        login_user(user)
+        return redirect(next or url_for('main.get_index'))
+
+@facebook.tokengetter
+def get_facebook_oauth_token():
+    return session.get('oauth_token')

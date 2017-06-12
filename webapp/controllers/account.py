@@ -50,17 +50,12 @@ def get_update_account(account_id):
 def post_update_account(account_id):
     form = AccountForm()
     if request.method == 'POST' and form.validate_on_submit():
-        # do something
         title = request.form.get('title')
         types = request.form.get('types')
         cost = request.form.get('cost')
         account = Account.objects(id=account_id).first()
-        #print('account', account.title)
 
-        account.update(title=title)
-        account.update(types=types)
-        account.update(cost=cost)
-        #account = Account.objects(id=account_id).update_one(set_title=title, set_type=type, set_cost=cost)
+        account.update(title=title, types=types, cost=cost)
         return redirect(url_for('main.get_index'))
     else:
         return redirect(url_for('main.get_update_account'))

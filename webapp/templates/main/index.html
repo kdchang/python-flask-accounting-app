@@ -24,7 +24,7 @@
                 <td>{{ account.types }}</td>
                 <td>{{ account.cost }}</td>
                 <td>
-                    <a href="/accounts/{{ account.id }}/update"><button class="btn btn-warning">修改</button></a>
+                    <a href="/accounts/{{ account.id }}/update"><button class="btn btn-warning" type="btn">修改</button></a>
                     <form action="/accounts/{{ account.id }}/delete" method="POST">
                         {{ form.csrf_token }}
                         <button class="btn btn-danger" type="submit">刪除</button>    
