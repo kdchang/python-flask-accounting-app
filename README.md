@@ -22,3 +22,7 @@ An Accounting Web App built by Python Flask
 7. [Flask HTTP Basic Auth](http://flask.pocoo.org/snippets/8/)
 8. [Celery Based Background Tasks](http://flask.pocoo.org/docs/0.12/patterns/celery/)
 9. [MongoEngine 查询（翻译）](https://segmentfault.com/a/1190000008025156)
+10. [用 Flask 打造 RESTful API](http://seanlin.logdown.com/posts/239771-use-flask-to-create-restful-api)
+11. [How To Use SSH Keys with DigitalOcean Droplets](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-digitalocean-droplets)
+12. [How To Serve Flask Applications with Gunicorn and Nginx on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-16-04)
+13. [ How To Serve Flask Applications with uWSGI and Nginx on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-16-04)
