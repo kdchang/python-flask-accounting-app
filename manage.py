@@ -15,7 +15,7 @@ app = create_app('webapp.config.%sConfig' % env.capitalize())
 
 migrate = Migrate(app, db)
 manager = Manager(app)
-manager.add_command('runserver', Server())
+manager.add_command('runserver', Server(host='0.0.0.0'))
 manager.add_command('db', MigrateCommand)
 
 @manager.shell
@@ -28,3 +28,4 @@ def make_shell_context():
 
 if __name__ == "__main__":
     manager.run()
+
