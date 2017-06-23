@@ -12,6 +12,10 @@ An Accounting Web App built by Python Flask
 8. Flask-WTF
 9. Passlib
 
+## Service Command
+1. sudo supervisorctl start flask_project
+2. netstat -tulpn
+
 ## Documents
 1. [[python][flask][flask-SQLAlchemy]关于flask-SQLAlchemy的初级使用教程](http://www.cnblogs.com/alima/p/5734992.html)
 2. [flask-migrate](https://flask-migrate.readthedocs.io/en/latest/)
@@ -30,3 +34,9 @@ An Accounting Web App built by Python Flask
 15. [How To Install the Anaconda Python Distribution on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-install-the-anaconda-python-distribution-on-ubuntu-16-04)
 16. [UFW Essentials: Common Firewall Rules and Commands](https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands)
 17. [ How To Read and Set Environmental and Shell Variables on a Linux VPS](https://www.digitalocean.com/community/tutorials/how-to-read-and-set-environmental-and-shell-variables-on-a-linux-vps)
+18. [Kickstarting Flask on Ubuntu - Setup and Deployment](https://realpython.com/blog/python/kickstarting-flask-on-ubuntu-setup-and-deployment/)
+19. [Understanding the Nginx Configuration File Structure and Configuration Contexts](https://www.digitalocean.com/community/tutorials/understanding-the-nginx-configuration-file-structure-and-configuration-contexts)
+20. [Flask Gunicorn Supervisor Nginx 项目部署小总结](https://gist.github.com/binderclip/f6b6f5ed4d71fa64c7c5)
+21. [在 Ubuntu Linux 中安裝 MongoDB 資料庫](https://blog.gtwang.org/linux/install-mongodb-on-ubuntu/)
+22. [Linux: Find Out Which Process Is Listening Upon a Port](https://www.cyberciti.biz/faq/what-process-has-open-linux-port/)
+

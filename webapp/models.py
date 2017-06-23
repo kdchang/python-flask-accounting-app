@@ -6,6 +6,7 @@ db = connect('iRichDB')
 
 class User(Document, UserMixin):
     username = StringField(max_length=20)
+    facebook_id = StringField(max_length=40)
     email = StringField(max_length=36, default='email')
     password = StringField(max_length=100)
     #pass

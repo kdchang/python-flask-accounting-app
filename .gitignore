@@ -102,3 +102,5 @@ ENV/
 
 # migration
 migrations/
+
+tmp.dat
